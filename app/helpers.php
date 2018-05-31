@@ -157,3 +157,13 @@ Form::macro('fieldAttributes', function ($name, $attributes = array())
 
     return array_merge(['id' => 'id-field-' . $name], $attributes);
 });
+
+function human_filesize($bytes, $decimals = 2)
+{
+    if ($bytes < 1024) {
+        return $bytes . ' B';
+    }
+
+    $factor = floor(log($bytes, 1024));
+    return sprintf("%.{$decimals}f ", $bytes / pow(1024, $factor)) . ['B', 'KB', 'MB', 'GB', 'TB', 'PB'][$factor];
+}

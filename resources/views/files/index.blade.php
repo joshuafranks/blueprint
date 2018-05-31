@@ -1,7 +1,7 @@
 @extends('common.template')
 
 @section('heading')
-    Viewing Project: {{ $project->name }}
+    Viewing All Files
 @stop
 
 @section('content')
@@ -11,15 +11,24 @@
                 <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Project</th>
                         <th>Uploaded</th>
+                        <th>Details</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($project->files as $file)
+                    @foreach($files as $file)
                         <tr>
                             <td>{{ $file->name }}</td>
+                            <td><a href="{{ route('projects.show', ['id' => $file->project->id]) }}">{{ $file->project->name }}</a></td>
                             <td>{{ $file->created_at }}</td>
+                            <td>
+                                Path: {{ $file->path }}<br><br>
+                                Size: {{ $file->size() }}<br>
+                                Mime: {{ $file->mimeType() }}<br>
+                                Last Modified: {{ $file->lastModified() }}
+                            </td>
                             <td>
                                 <a href="{{ route('files.show', [$file->id]) }}">Download</a>
                             </td>
@@ -29,6 +38,4 @@
             </table>
         </div>
     </div>
-    {!! Form::open(array('route' => array('projectfiles.store', $project->id), 'files' => true)) !!}
-    @include('files.partials.form')
 @stop

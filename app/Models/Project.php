@@ -8,4 +8,8 @@ class Project extends BaseModel
         'name',
         'description',
     ];
+
+    public function files() {
+    	return $this->hasMany(File::class);
+    }
 }

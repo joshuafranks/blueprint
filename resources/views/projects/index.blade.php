@@ -8,6 +8,7 @@
     <div class="actions-container">
         <a class="btn btn-primary btn-flat pull-right" href="{{ route('projects.create') }}">Create Project</a>
         <div class="clearfix"></div>
+        <a class="btn btn-secondary btn-flat pull-right" href="{{ route('files.index') }}">View All Files</a>
     </div>
 
     <div class="box box-primary">
@@ -29,6 +30,7 @@
                             <td>{{ $project->updated_at }}</td>
                             <td>
                                 <a href="{{ route('projects.edit', [$project->id]) }}">Edit</a>
+                                <a href="{{ route('projects.show', [$project->id]) }}">View</a>
                             </td>
                         </tr>
                     @endforeach

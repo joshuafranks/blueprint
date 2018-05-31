@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
 use App\Interfaces\ProjectEloquentInterface;
+
 use Illuminate\Http\RedirectResponse;
 
 class ProjectsController extends Controller
@@ -31,7 +32,6 @@ class ProjectsController extends Controller
     public function index()
     {
         $projects = $this->projects->paginate('name');
-
         return view('projects.index', compact('projects'));
     }
 
@@ -66,9 +66,9 @@ class ProjectsController extends Controller
      */
     public function show($id)
     {
-        app()->abort(404, 'Not implemented');
-
-        return view('projects.show');
+        $project = $this->projects->find($id, ['files']);
+        
+        return view('projects.show', compact('project'));
     }
 
     /**
